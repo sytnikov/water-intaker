@@ -13,11 +13,31 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final amountController = TextEditingController();
+  bool _isLoading = true;
 
   @override
   void initState() {
-    Provider.of<WaterData>(context, listen: false).getWater();
+    _loadData();
     super.initState();
+  }
+
+  void _loadData() async {
+    await Provider.of<WaterData>(context, listen: false).getWater().then(
+      (waters) => {
+        if (waters.isNotEmpty)
+          {
+            setState(() {
+              _isLoading = false;
+            }),
+          }
+        else
+          {
+            setState(() {
+              _isLoading = true;
+            }),
+          },
+      },
+    );
   }
 
   void saveWater() async {
@@ -93,16 +113,14 @@ class _HomePageState extends State<HomePage> {
           onPressed: addWater,
           child: Icon(Icons.add),
         ),
-        body: ListView.builder(
+        body: !_isLoading ? ListView.builder(
           itemCount: value.waterDataList.length,
           itemBuilder: (context, index) {
             final waterModel = value.waterDataList[index];
             return WaterTile(waterModel: waterModel);
           },
-        ),
+        ) : Center(child: CircularProgressIndicator()),
       ),
     );
-  } 
+  }
 }
-
-
