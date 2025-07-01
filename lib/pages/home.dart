@@ -9,15 +9,38 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   
+  final amountController = TextEditingController();
+
   void addWater() {
     showDialog(context: context, builder: (context) => 
       AlertDialog(
         title: Text('Add Water'),
         content: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          spacing: 10,
           children: [
-            Text('Add water to your daily intake...')
+            Text('Add water to your daily intake...'),
+            TextField(
+              controller: amountController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Amount'
+              ),
+            )
           ],
         ),
+        actions: [
+          TextButton(onPressed: () {
+            Navigator.pop(context);
+          }, child: Text('Cancel')),
+          TextButton(onPressed: () {
+            // save data to db
+
+          }, child: Text('Save'))
+        ],
       )
     );
   }
