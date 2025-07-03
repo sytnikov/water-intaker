@@ -106,7 +106,6 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: Text('Water'),
           centerTitle: true,
-          elevation: 4,
           actions: [IconButton(onPressed: () {}, icon: Icon(Icons.map))],
         ),
         backgroundColor: Theme.of(context).colorScheme.surface,
