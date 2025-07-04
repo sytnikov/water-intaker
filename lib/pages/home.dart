@@ -110,9 +110,9 @@ class _HomePageState extends State<HomePage> {
               Text('Weekly: ', style: Theme.of(context).textTheme.titleMedium),
               Text(
                 '${value.calculateWeeklyWaterIntake(value)} ml',
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  fontWeight: FontWeight.bold
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -139,6 +139,32 @@ class _HomePageState extends State<HomePage> {
                   )
                 : Center(child: CircularProgressIndicator()),
           ],
+        ),
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                child: Text(
+                  'Water Intake',
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              ListTile(
+                title: Text('Settings'),
+                onTap: () {},
+              ),
+              ListTile(
+                title: Text('About'),
+                onTap: () {},
+              )
+            ],
+          ),
         ),
       ),
     );
