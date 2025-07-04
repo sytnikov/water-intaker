@@ -104,7 +104,18 @@ class _HomePageState extends State<HomePage> {
     return Consumer<WaterData>(
       builder: (context, value, child) => Scaffold(
         appBar: AppBar(
-          title: Text('Water'),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Weekly: ', style: Theme.of(context).textTheme.titleMedium),
+              Text(
+                '${value.calculateWeeklyWaterIntake(value)} ml',
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+            ],
+          ),
           centerTitle: true,
           actions: [IconButton(onPressed: () {}, icon: Icon(Icons.map))],
         ),
